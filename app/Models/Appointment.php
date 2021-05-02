@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 
-class Section extends Model implements TranslatableContract
+class Appointment extends Model implements TranslatableContract
 {
     use  Translatable;
-    public $translatedAttributes=['name','description'];
+    public $translatedAttributes=['name'];
     protected  $guarded=[];
 
     use HasFactory;

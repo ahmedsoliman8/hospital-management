@@ -11,6 +11,11 @@
     <link href="{{URL::asset('Dashboard/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <!--Internal   Notify -->
     <link href="{{URL::asset('dashboard/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
 @endsection
 
 
@@ -37,14 +42,22 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <a href="{{route('doctors.create')}}" class="btn btn-primary" role="button" aria-pressed="true">{{trans('doctors.add_doctor')}}</a>
+
                     </div>
                 </div>
                 <div class="card-body">
+                    <button class="btn btn-danger delBtn"><i class="fa fa-trash"></i>حذف الكل</button>
+                    <form action="{{ route('doctors.destroy', 'test') }}" method="post">
+                        {{ method_field('delete') }}
+                        {{ csrf_field() }}
+
                     <div class="table-responsive">
                         <table id="example" class="table key-buttons text-md-nowrap">
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th><input type="checkbox" class="check_all" onclick="check_all()"/></th>
+                                <th >{{trans('doctors.doctor_photo')}}</th>
                                 <th >{{trans('doctors.name')}}</th>
                                 <th >{{trans('doctors.email')}}</th>
                                 <th>{{trans('doctors.section')}}</th>
@@ -52,7 +65,9 @@
                                 <th >{{trans('doctors.appointments')}}</th>
                                 <th>{{trans('doctors.price')}}</th>
                                 <th >{{trans('doctors.status')}}</th>
+                                {{--
                                 <th>{{trans('doctors.created_at')}}</th>
+                                --}}
                                 <th>{{trans('doctors.processes')}}</th>
                             </tr>
                             </thead>
@@ -60,23 +75,36 @@
                           @foreach($doctors as $doctor)
                               <tr>
                                   <td>{{ $loop->iteration }}</td>
+                                  <td>@include('Dashboard.doctors.btns.checkbox')</td>
+                                  <td>
+                                      @if($doctor->image&&\File::exists('Dashboard/img/doctors/'.$doctor->image->filename))
+                                          <img src="{{Url::asset('Dashboard/img/doctors/'.$doctor->image->filename)}}" height="50px" width="50px" alt="">
+                                      @else
+                                          <img src="{{Url::asset('Dashboard/img/doctor_default.png')}}" height="50px" width="50px" alt="">
+                                      @endif
+                                  </td>
                                   <td>{{ $doctor->name }}</td>
                                   <td>{{ $doctor->email }}</td>
                                   <td>{{ $doctor->section->name}}</td>
                                   <td>{{ $doctor->phone}}</td>
                                   <td>
-                                      <?php $days= explode(",",$doctor->appointments);?>
-                                      @foreach(LANGUAGEDAYS[LaravelLocalization::setLocale()] as $key=>$day)
-                                             @if(in_array($key,$days)){{$day}}@endif
+                                      <?php $days= explode(",",$doctor->appointments);
+                                      $days_selected=[];
+                                       ?>
+                                      @foreach($appointments as $key=>$appointment)
+                                             @if(in_array($key,$days))
+                                                 <?php $days_selected[]=$appointment->name ?>
+                                              @endif
                                       @endforeach
+                                      {{implode(",",$days_selected)}}
                                   </td>
                                   <td>{{ $doctor->price}}</td>
                                   <td>
                                       <div class="dot-label bg-{{$doctor->status == 1 ? 'success':'danger'}} ml-1"></div>
                                       {{$doctor->status == 1 ? trans('doctors.enabled'):trans('doctors.not_enabled')}}
                                   </td>
-
-                                  <td>{{ $doctor->created_at->diffForHumans() }}</td>
+                                  {{--
+                                  <td>{{ $doctor->created_at->diffForHumans() }}</td>--}}
                                   <td>
                                       <a class="modal-effect btn btn-sm btn-info" href="{{route('doctors.edit',$doctor->id)}}"><i class="las la-pen"></i></a>
                                       <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$doctor->id}}"><i class="las la-trash"></i></a>
@@ -87,6 +115,10 @@
                             </tbody>
                         </table>
                     </div>
+                    </form>
+                    @include('Dashboard.doctors.delete_select')
+
+
                 </div>
             </div>
         </div>
@@ -122,4 +154,5 @@
     <!--Internal  Notify js -->
     <script src="{{URL::asset('dashboard/plugins/notify/js/notifIt.js')}}"></script>
     <script src="{{URL::asset('/plugins/notify/js/notifit-custom.js')}}"></script>
+
 @endsection

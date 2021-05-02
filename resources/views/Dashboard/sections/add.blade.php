@@ -17,6 +17,13 @@
                             <input type="text" name="{{ $localeCode }}[name]" class="form-control" value="{{ old($localeCode . '.name') }}">
                         </div>
                     @endforeach
+
+                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties )
+                            <div class="form-group">
+                                <label>{{trans('Dashboard/sections_trans.' . $localeCode . '.description_sections')}}</label>
+                                <textarea  name="{{ $localeCode }}[description]" class="form-control" >{{ old($localeCode . '.description') }}</textarea>
+                            </div>
+                    @endforeach
                     {{--
                     <label for="exampleInputPassword1">{{trans('Dashboard/sections_trans.name_sections')}}</label>
                     <input type="text" name="name" class="form-control">

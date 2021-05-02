@@ -24,7 +24,7 @@ class ImageFactory extends Factory
     {
         return [
             'filename' =>  $this->faker->randomElement(['1.jpg', '2.jpg', '3.jpg', '4.jpg']),
-            'imageable_id' => Doctor::all()->random()->id,
+            'imageable_id' => $this->faker->unique()->randomElement(Doctor::get()->pluck("id")->toArray()),
             'imageable_type' => 'App\Models\Doctor',
         ];
     }

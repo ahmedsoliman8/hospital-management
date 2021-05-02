@@ -8,6 +8,7 @@ return array (
     'name' => 'Doctor Name Arabic',
   ),
   'created_at' => 'CreatedAt',
+  'delete_doctor' => 'Delete Doctor',
   'doctor_photo' => 'Doctor Image',
   'doctors' => 'Doctors',
   'email' => 'Email',

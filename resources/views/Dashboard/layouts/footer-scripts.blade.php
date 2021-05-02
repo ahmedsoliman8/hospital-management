@@ -31,3 +31,7 @@
 <!-- custom js -->
 <script src="{{URL::asset('Dashboard/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('Dashboard/plugins/side-menu/sidemenu.js')}}"></script>
+<script src="{{URL::asset('Dashboard/js/myfunction.js')}}"></script>
+<script>
+    delete_all();
+</script>

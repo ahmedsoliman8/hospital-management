@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             AdminTableSeeder::class,
             SectionTableSeeder::class,
             DoctorTableSeeder::class,
-            ImageTableSeeder::class
+            ImageTableSeeder::class,
+            AppointmentTableSeeder::class
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repository\Doctors;
 
 use App\Interfaces\Doctors\DoctorRepositoryInterface;
+use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Section;
 use Illuminate\Support\Facades\DB;
@@ -18,14 +19,16 @@ class DoctorRepository implements DoctorRepositoryInterface
         $doctors = Doctor::all();
        // return $doctors[0]->section;
         //dd( $doctors);
-        return view('Dashboard.doctors.index',compact('doctors'));
+        $appointments=Appointment::all();
+        return view('Dashboard.doctors.index',compact('doctors','appointments'));
     }
 
 
     public function create()
     {
         $sections = Section::all();
-        return view('Dashboard.doctors.add',compact('sections'));
+        $appointments=Appointment::all();
+        return view('Dashboard.doctors.add',compact('sections','appointments'));
     }
 
     public function store($request){
@@ -58,8 +61,27 @@ class DoctorRepository implements DoctorRepositoryInterface
 
     public function destroy($request)
     {
-        // TODO: Implement destroy() method.
+       // return $request->all();
+        if($request->item){
+            foreach ($request->item as $item){
+                $doctor=Doctor::find($item);
+                if($doctor&&$doctor->image){
+                    $this->Delete_attachment('upload_image','doctors/'.$doctor->image->filename,$item,$doctor->image->filename);
+                }
+            }
+            Doctor::destroy($request->item);
+            session()->flash('delete');
+            return redirect()->route('doctors.index');
+
+        }
+        //---------------------------------------------------------------
+        else{
+            if($request->filename){
+                $this->Delete_attachment('upload_image','doctors/'.$request->filename,$request->id,$request->filename);
+            }
+            Doctor::destroy($request->id);
+            session()->flash('delete');
+            return redirect()->route('doctors.index');
+        }
     }
-
-
 }

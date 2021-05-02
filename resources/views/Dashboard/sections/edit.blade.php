@@ -27,6 +27,13 @@
                             <input type="text" name="{{ $localeCode }}[name]" class="form-control" value="{{  $section->translateOrNew($localeCode)->name }}">
                         </div>
                     @endforeach
+
+                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties )
+                        <div class="form-group">
+                            <label>{{trans('Dashboard/sections_trans.' . $localeCode . '.description_sections')}}</label>
+                            <textarea name="{{ $localeCode }}[description]" class="form-control" >{{  $section->translateOrNew($localeCode)->description }}</textarea>
+                        </div>
+                    @endforeach
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('Dashboard/sections_trans.Close')}}</button>
