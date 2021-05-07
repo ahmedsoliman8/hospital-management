@@ -36,4 +36,9 @@ class Doctor extends Model implements TranslatableContract
     {
         return $this->belongsTo(Section::class,'section_id');
     }
+
+    public function doctorappointments()
+    {
+        return $this->belongsToMany(Appointment::class,'appointment_doctor','doctor_id','appointment_id');
+    }
 }

@@ -19,9 +19,9 @@ class CreateDoctorsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string("phone");
-            $table->decimal("price",8,2);
+           // $table->decimal("price",8,2);
             $table->boolean('status')->default(1);
-            $table->string('appointments');
+           // $table->string('appointments');
            // $table->unsignedBigInteger('section_id');
             $table->foreignId('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->timestamps();

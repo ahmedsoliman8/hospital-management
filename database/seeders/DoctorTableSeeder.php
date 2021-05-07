@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Appointment;
 use App\Models\Doctor;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,10 @@ class DoctorTableSeeder extends Seeder
      */
     public function run()
     {
-       Doctor::factory()->count(10)->create();
+       $doctors= Doctor::factory()->count(10)->create();
+       // $Appointments = Appointment::all()->random()->id;
+        foreach ($doctors as $doctor){
+            $doctor->doctorappointments()->attach(Appointment::all()->random(2)->pluck("id"));
+        }
     }
 }

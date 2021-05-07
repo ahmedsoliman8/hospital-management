@@ -7,10 +7,14 @@ return array (
   array (
     'name' => 'Doctor Name Arabic',
   ),
+  'change_status' => 'Change Status',
+  'choose' => 'Choose',
+  'confirm_password' => 'ConfirmPassword',
   'created_at' => 'CreatedAt',
   'delete_doctor' => 'Delete Doctor',
   'doctor_photo' => 'Doctor Image',
   'doctors' => 'Doctors',
+  'edit_doctor' => 'Edit Doctor',
   'email' => 'Email',
   'en' => 
   array (
@@ -18,6 +22,7 @@ return array (
   ),
   'enabled' => 'Enabled',
   'name' => 'Name',
+  'new_password' => 'New Password',
   'not_enabled' => 'Not Enabled',
   'password' => 'Password',
   'phone' => 'Phone',
@@ -26,5 +31,6 @@ return array (
   'section' => 'Section',
   'status' => 'Status',
   'submit' => 'Submit',
+  'update_password' => 'Update Password',
   'view_all' => 'View All',
 );

@@ -67,7 +67,7 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->Doctors->edit($id);
     }
 
     /**
@@ -79,7 +79,7 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->Doctors->update($request);
     }
 
     /**
@@ -91,5 +91,24 @@ class DoctorController extends Controller
     public function destroy(Request $request)
     {
        return $this->Doctors->destroy($request);
+    }
+
+    public function update_password(Request $request)
+    {
+      //  return $request->all();
+        $this->validate($request, [
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6'
+        ]);
+
+        return $this->Doctors->update_password($request);
+    }
+
+    public function update_status(Request $request)
+    {
+        $this->validate($request, [
+            'status' => 'required|in:0,1',
+        ]);
+        return $this->Doctors->update_status($request);
     }
 }

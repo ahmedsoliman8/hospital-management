@@ -18,5 +18,9 @@ class Section extends Model implements TranslatableContract
 
     use HasFactory;
 
+    public function  doctors(){
+        return $this->hasMany(Doctor::class);
+    }
+
 
 }

@@ -17,10 +17,7 @@ class DoctorRepository implements DoctorRepositoryInterface
     public function index()
     {
         $doctors = Doctor::all();
-       // return $doctors[0]->section;
-        //dd( $doctors);
-        $appointments=Appointment::all();
-        return view('Dashboard.doctors.index',compact('doctors','appointments'));
+        return view('Dashboard.doctors.index',compact('doctors'));
     }
 
 
@@ -32,19 +29,17 @@ class DoctorRepository implements DoctorRepositoryInterface
     }
 
     public function store($request){
-     //   return $request->all();
+
         try {
             DB::beginTransaction();
-            $requestData=$request->except(['_token','_method','photo']);
+            $requestData=$request->except(['_token','_method','photo','appointments']);
             $requestData["password"] = Hash::make($request->password);
-            $requestData["appointments"] =implode(",",$request->appointments);
             $doctor=Doctor::create($requestData);
-           //Upload img
+            $doctor->doctorappointments()->attach($request->appointments);
             $this->verifyAndStoreImage($request,'photo','doctors','upload_image',$doctor->id,'App\Models\Doctor');
             DB::commit();
             session()->flash('add');
             return redirect()->route('doctors.create');
-
         }
         catch (\Exception $e) {
             DB::rollback();
@@ -54,14 +49,48 @@ class DoctorRepository implements DoctorRepositoryInterface
 
     }
 
+    public function edit($id)
+    {
+        $doctor=Doctor::find($id);
+        $sections = Section::all();
+        $appointments=Appointment::all();
+        $appointmentSelected=$doctor->doctorappointments->pluck("id")->toArray();
+        return view('Dashboard.doctors.edit',compact('sections','appointments','doctor','appointmentSelected'));
+    }
+
     public function update($request)
     {
-        // TODO: Implement update() method.
+        try {
+            DB::beginTransaction();
+            $doctor=Doctor::find($request->id);
+            $requestData=$request->except(['_token','_method','photo','appointments']);
+            $doctor->update($requestData);
+            // update pivot tABLE
+            $doctor->doctorappointments()->sync($request->appointments);
+
+            // update photo
+            if ($request->has('photo')){
+                // Delete old photo
+                if ($doctor->image){
+                    $old_img = $doctor->image->filename;
+                    $this->Delete_attachment('upload_image','doctors/'.$old_img,$request->id,$old_img);
+                }
+                //Upload img
+                $this->verifyAndStoreImage($request,'photo','doctors','upload_image',$request->id,'App\Models\Doctor');
+            }
+
+            DB::commit();
+            session()->flash('edit');
+            return redirect()->back();
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function destroy($request)
     {
-       // return $request->all();
         if($request->item){
             foreach ($request->item as $item){
                 $doctor=Doctor::find($item);
@@ -70,18 +99,51 @@ class DoctorRepository implements DoctorRepositoryInterface
                 }
             }
             Doctor::destroy($request->item);
-            session()->flash('delete');
-            return redirect()->route('doctors.index');
+
 
         }
-        //---------------------------------------------------------------
         else{
             if($request->filename){
                 $this->Delete_attachment('upload_image','doctors/'.$request->filename,$request->id,$request->filename);
             }
             Doctor::destroy($request->id);
-            session()->flash('delete');
-            return redirect()->route('doctors.index');
+
+        }
+        session()->flash('delete');
+        return redirect()->route('doctors.index');
+    }
+
+    public function update_password($request)
+    {
+        try {
+            $doctor = Doctor::findorfail($request->id);
+            $doctor->update([
+                'password'=>Hash::make($request->password)
+            ]);
+
+            session()->flash('edit');
+            return redirect()->back();
+        }
+
+        catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function update_status($request)
+    {
+        try {
+            $doctor = Doctor::findorfail($request->id);
+            $doctor->update([
+                'status'=>$request->status
+            ]);
+
+            session()->flash('edit');
+            return redirect()->back();
+        }
+
+        catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 }

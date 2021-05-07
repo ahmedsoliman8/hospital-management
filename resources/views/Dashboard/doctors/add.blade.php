@@ -33,14 +33,16 @@
                     <form action="{{ route('doctors.store') }}" method="post" autocomplete="off" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="pd-30 pd-sm-40 bg-gray-200">
+                            <?php $autoFocus=true;  ?>
                             @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties )
                             <div class="row row-xs align-items-center mg-b-20">
                                 <div class="col-md-1">
                                     <label>{{trans('doctors.' . $localeCode . '.name')}}</label>
                                 </div>
                                 <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <input type="text" name="{{ $localeCode }}[name]" class="form-control" value="{{ old($localeCode . '.name') }}">
+                                    <input  {{$autoFocus?"autofocus":""}} type="text" name="{{ $localeCode }}[name]" class="form-control" value="{{ old($localeCode . '.name') }}">
                                 </div>
+                                <?php $autoFocus=false;  ?>
                             </div>
                             @endforeach
 
@@ -104,7 +106,7 @@
                                     <select multiple="multiple" class="testselect2" name="appointments[]">
                                         <option selected value="" selected disabled>-- حدد المواعيد --</option>
                                         @foreach($appointments as $appointment)
-                                        <option value="{{$appointment->id}}">{{$appointment->name}}</option>
+                                        <option value="{{intval($appointment->id)}}">{{$appointment->name}}</option>
                                         @endforeach
                                     </select>
 
@@ -112,17 +114,7 @@
 
                             </div>
 
-                            <div class="row row-xs align-items-center mg-b-20">
-                                <div class="col-md-1">
-                                    <label for="exampleInputEmail1">
-                                        {{trans('doctors.price')}}</label>
-                                </div>
 
-                                <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                    <input class="form-control" name="price" value="0.00" type="text">
-                                </div>
-
-                            </div>
 
 
 

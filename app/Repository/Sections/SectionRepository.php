@@ -45,4 +45,13 @@ class SectionRepository implements SectionRepositoryInterface
         return redirect()->route('sections.index');
     }
 
+    public function show($id)
+    {
+
+        $doctors =Section::findOrFail($id)->doctors;
+        $section = Section::findOrFail($id);
+
+        return view('Dashboard.sections.show_doctors',compact('doctors','section'));
+    }
+
 }
