@@ -3,6 +3,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\DoctorController;
+use App\Http\Controllers\Dashboard\SingleServiceController;
+use App\Http\Livewire\CreateGroupServices;
 
 Route::get('/Dashboard_Admin',[DashboardController::class,'index']);
 
@@ -38,6 +40,18 @@ Route::group(
         Route::post('update_password', [DoctorController::class, 'update_password'])->name('update_password');
         Route::post('update_status', [DoctorController::class, 'update_status'])->name('update_status');
         //----------------------------------------------------------------------------------------------------------------
+
+        //------------------------Service-----------------------------------------------------------------------------------
+        Route::resource('service', SingleServiceController::class);
+
+        //----------------------------------------------------------------------------------------------------------------
+
+        //------------------------------------GroupServices---------------------------------------------------------------
+        Route::view('Add_GroupServices','livewire.GroupServices.include_create')->name('Add_GroupServices');
+        //------------------------------------------------------------------------------------------------------------------
+
+
+
     });
     //-------------------------------------------------------------------------------
 

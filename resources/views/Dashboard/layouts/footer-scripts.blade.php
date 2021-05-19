@@ -35,3 +35,5 @@
 <script>
     delete_all();
 </script>
+
+@livewireScripts

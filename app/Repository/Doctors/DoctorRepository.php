@@ -60,6 +60,8 @@ class DoctorRepository implements DoctorRepositoryInterface
 
     public function update($request)
     {
+
+       // dd( $request->all());
         try {
             DB::beginTransaction();
             $doctor=Doctor::find($request->id);
@@ -71,6 +73,7 @@ class DoctorRepository implements DoctorRepositoryInterface
             // update photo
             if ($request->has('photo')){
                 // Delete old photo
+              //  return $doctor->image;
                 if ($doctor->image){
                     $old_img = $doctor->image->filename;
                     $this->Delete_attachment('upload_image','doctors/'.$old_img,$request->id,$old_img);

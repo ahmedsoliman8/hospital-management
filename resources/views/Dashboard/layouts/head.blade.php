@@ -12,6 +12,8 @@
 <link href="{{URL::asset('Dashboard/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
 @yield('css')
 
+@livewireStyles
+
 @if(App::getLocale()=='ar')
     <!-- Sidemenu css -->
     <link rel="stylesheet" href="{{URL::asset('Dashboard/css-rtl/sidemenu.css')}}">
