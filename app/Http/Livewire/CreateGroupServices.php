@@ -18,7 +18,7 @@ class CreateGroupServices extends Component
     public $notes;
     public $ServiceSaved = false;
     public $ServiceUpdated = false;
-    public $updateMode = false,$show_table = true,$group_id;
+    public $updateMode = false,$show_table = true,$group_id,$group_delete_id;
 
     public function mount()
     {
@@ -126,7 +126,7 @@ class CreateGroupServices extends Component
             // حفظ العلاقة
             $Groups->service_group()->detach();
             foreach ($this->GroupsItems as $GroupsItem) {
-                $Groups->service_group()->attach($GroupsItem['service_id']);
+                $Groups->service_group()->attach($GroupsItem['service_id'], ['quantity' => $GroupsItem['quantity']]);
             }
             //$this->reset('GroupsItems', 'name_group', 'notes');
           //  $this->discount_value = 0;
@@ -160,7 +160,7 @@ class CreateGroupServices extends Component
             $Groups->save();
             // حفظ العلاقة
             foreach ($this->GroupsItems as $GroupsItem) {
-                $Groups->service_group()->attach($GroupsItem['service_id']);
+                $Groups->service_group()->attach($GroupsItem['service_id'],['quantity' => $GroupsItem['quantity']]);
             }
             $this->reset('GroupsItems', 'name_group', 'notes');
             $this->discount_value = 0;
@@ -186,16 +186,16 @@ class CreateGroupServices extends Component
         $this->name_group=$group->name;
         $this->notes=$group->notes;
 
-        //dd($group->discount_value);
+       // dd($group->discount_value);
         $this->discount_value = 	intval($group->discount_value);
         $this->ServiceSaved = false;
 
       foreach ($group->service_group as $serviceGroup)
       {
-         // dd($serviceGroup->name);
+       //  dd($serviceGroup);
           $this->GroupsItems[] = [
               'service_id' => $serviceGroup->id,
-              'quantity' => 1,
+              'quantity' =>  $serviceGroup->pivot->quantity,
               'is_saved' => true,
               'service_name' => $serviceGroup->name,
               'service_price' => $serviceGroup->price
@@ -206,10 +206,14 @@ class CreateGroupServices extends Component
 
     }
 
-    public function delete($id){
-       $group= Group::findOrFail($id);
-       $group->service_group()->detach();
-       $group->delete();
+    public function delete(){
+        //dd($this->group_delete_id);
+        $group= Group::findOrFail($this->group_delete_id);
+        $group->service_group()->detach();
+        $group->delete();
         return redirect()->to('/Add_GroupServices');
+    }
+    public function deleteModel($id){
+        $this->group_delete_id=$id;
     }
 }
