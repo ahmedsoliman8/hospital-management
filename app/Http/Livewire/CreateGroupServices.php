@@ -192,7 +192,7 @@ class CreateGroupServices extends Component
 
       foreach ($group->service_group as $serviceGroup)
       {
-       //  dd($serviceGroup);
+       // dd($serviceGroup);
           $this->GroupsItems[] = [
               'service_id' => $serviceGroup->id,
               'quantity' =>  $serviceGroup->pivot->quantity,

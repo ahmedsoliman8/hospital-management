@@ -94,7 +94,7 @@
                                                wire:model="GroupsItems.{{$index}}.quantity"/>
                                         {{ $groupItem['quantity'] }}
                                     @else
-                                        <input type="number" name="GroupsItems[{{$index}}][quantity]"
+                                        <input type="number" step="1" min="1" name="GroupsItems[{{$index}}][quantity]"
                                                class="form-control" wire:model="GroupsItems.{{$index}}.quantity"/>
                                     @endif
                                 </td>

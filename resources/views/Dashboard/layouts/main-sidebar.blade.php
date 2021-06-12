@@ -43,8 +43,8 @@
 						<ul class="slide-menu">
 							<li><a class="slide-item" href="{{route('service.index')}}">{{trans('main-sidebar_trans.Single_service')}}</a></li>
 							<li><a class="slide-item" href="{{ route('Add_GroupServices') }}">{{trans('main-sidebar_trans.group_services')}}</a></li>
-							<li><a class="slide-item" href="{{ url('/' . $page='contacts') }}">{{trans('main-sidebar_trans.Insurance')}}</a></li>
-							<li><a class="slide-item" href="{{ url('/' . $page='rangeslider') }}">{{trans('main-sidebar_trans.ambulance')}}</a></li>
+							<li><a class="slide-item" href="{{ route('insurances.index') }}">{{trans('main-sidebar_trans.Insurance')}}</a></li>
+							<li><a class="slide-item" href="{{ route('ambulances.index') }}">{{trans('main-sidebar_trans.ambulance')}}</a></li>
 							<li><a class="slide-item" href="{{ url('/' . $page='calendar') }}">{{trans('main-sidebar_trans.Ambulance_calls')}}</a></li>
 						</ul>
 					</li>
