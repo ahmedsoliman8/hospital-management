@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\SingleServiceController;
 use App\Http\Controllers\Dashboard\InsuranceController;
 use App\Http\Controllers\Dashboard\AmbulanceController;
 use App\Http\Livewire\CreateGroupServices;
+use App\Http\Controllers\Dashboard\PatientController;
 
 Route::get('/Dashboard_Admin',[DashboardController::class,'index']);
 
@@ -64,6 +65,13 @@ Route::group(
         //############################# Ambulance route ##########################################
 
         Route::resource('ambulances', AmbulanceController::class);
+
+        //############################# end insurance route ######################################
+
+
+        //############################# Patient route ##########################################
+
+        Route::resource('patients', PatientController::class);
 
         //############################# end insurance route ######################################
 
