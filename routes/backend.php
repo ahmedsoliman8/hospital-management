@@ -9,6 +9,8 @@ use App\Http\Controllers\Dashboard\AmbulanceController;
 use App\Http\Livewire\CreateGroupServices;
 use App\Http\Controllers\Dashboard\PatientController;
 
+use App\Http\Controllers\Dashboard\ReceiptAccountController;
+
 Route::get('/Dashboard_Admin',[DashboardController::class,'index']);
 
 Route::group(
@@ -82,6 +84,18 @@ Route::group(
         Route::view('single_invoices','livewire.single_invoices.index')->name('single_invoices');
 
         //############################# end single_invoices route ######################################
+
+
+
+
+
+
+
+        //############################# Receipt route ##########################################
+
+        Route::resource('receipts', ReceiptAccountController::class);
+
+        //############################# end Receipt route ######################################
 
 
 
