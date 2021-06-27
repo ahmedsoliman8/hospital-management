@@ -17,7 +17,7 @@ class CreateReceiptAccountsTable extends Migration
             $table->id();
             $table->date('date');
             $table->foreignId('patient_id')->references('id')->on('patients')->onDelete('cascade');
-            $table->decimal('debit',8,2)->nullable();
+            $table->decimal('amount',8,2)->nullable();
             $table->string('description');
             $table->timestamps();
         });

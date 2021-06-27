@@ -1,6 +1,6 @@
 @extends('Dashboard.layouts.master')
 @section('title')
-    سندات القبض
+    سندات الصرف
 @stop
 @section('css')
     <!-- Internal Data table css -->
@@ -21,7 +21,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">الحسابات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ سندات القبض</span>
+							<h4 class="content-title mb-0 my-auto">الحسابات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ سندات الصرف</span>
 						</div>
 					</div>
 				</div>
@@ -36,7 +36,7 @@
                             <div class="card">
                                 <div class="card-header pb-0">
                                     <div class="d-flex justify-content-between">
-                                        <a href="{{route('receipts.create')}}" class="btn btn-primary" role="button"
+                                        <a href="{{route('payments.create')}}" class="btn btn-primary" role="button"
                                            aria-pressed="true">اضافة سند جديد</a>
                                     </div>
                                 </div>
@@ -54,19 +54,19 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                           @foreach($receipts as $receipt)
+                                           @foreach($payments as $payment)
                                                <tr>
                                                    <td>{{$loop->iteration}}</td>
-                                                   <td>{{ $receipt->patients->name }}</td>
-                                                   <td>{{ number_format($receipt->amount, 2) }}</td>
-                                                   <td>{{ \Str::limit($receipt->description, 50) }}</td>
-                                                   <td>{{ $receipt->created_at->diffForHumans() }}</td>
+                                                   <td>{{ $payment->patients->name }}</td>
+                                                   <td>{{ number_format($payment->amount, 2) }}</td>
+                                                   <td>{{ \Str::limit($payment->description, 50) }}</td>
+                                                   <td>{{ $payment->created_at->diffForHumans() }}</td>
                                                    <td>
-                                                       <a href="{{route('receipts.edit',$receipt->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                                                       <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$receipt->id}}"><i class="las la-trash"></i></a>
+                                                       <a href="{{route('payments.edit',$payment->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                                       <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$payment->id}}"><i class="las la-trash"></i></a>
                                                    </td>
                                                </tr>
-                                           @include('Dashboard.receipts.delete')
+                                           @include('Dashboard.payments.delete')
                                            @endforeach
                                             </tbody>
                                         </table>

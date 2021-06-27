@@ -11,6 +11,8 @@ use App\Http\Controllers\Dashboard\PatientController;
 
 use App\Http\Controllers\Dashboard\ReceiptAccountController;
 
+use App\Http\Controllers\Dashboard\PaymentAccountController;
+
 Route::get('/Dashboard_Admin',[DashboardController::class,'index']);
 
 Route::group(
@@ -96,6 +98,13 @@ Route::group(
         Route::resource('receipts', ReceiptAccountController::class);
 
         //############################# end Receipt route ######################################
+
+
+        //############################# Payment route ##########################################
+
+      Route::resource('payments', PaymentAccountController::class);
+
+        //############################# end Payment route ######################################
 
 
 
