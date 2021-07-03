@@ -64,6 +64,7 @@
                                                    <td>
                                                        <a href="{{route('payments.edit',$payment->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$payment->id}}"><i class="las la-trash"></i></a>
+                                                       <a href="{{route('payments.show',$payment->id)}}" class="btn btn-primary btn-sm" target="_blank" title="طباعه سند صرف"><i class="fas fa-print"></i></a>
                                                    </td>
                                                </tr>
                                            @include('Dashboard.payments.delete')

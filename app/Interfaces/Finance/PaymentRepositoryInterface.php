@@ -18,6 +18,9 @@ interface PaymentRepositoryInterface
     // edit Payment
     public function edit($id);
 
+    // Show Payment
+    public function show($id);
+
     // Update Payment
     public function update($request);
 

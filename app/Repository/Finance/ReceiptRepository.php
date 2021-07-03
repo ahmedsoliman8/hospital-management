@@ -77,6 +77,12 @@ class ReceiptRepository implements ReceiptRepositoryInterface
         return view('Dashboard.receipts.edit',compact('receipt_accounts','patients'));
     }
 
+    public function show($id)
+    {
+        $receipt_account = ReceiptAccount::findorfail($id);
+        return view('Dashboard.receipts.print',compact('receipt_account'));
+    }
+
     public function update($request)
     {
 

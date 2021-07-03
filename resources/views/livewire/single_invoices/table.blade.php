@@ -36,6 +36,8 @@
                 <td>
                     <button wire:click="edit({{ $single_invoice->id }})" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button>
                     <button  class="btn btn-danger btn-sm" wire:click="deleteModel({{ $single_invoice->id }})"  data-toggle="modal" data-target="#deleteInvoice"><i class="fa fa-trash"></i></button>
+                    <button wire:click="print({{ $single_invoice->id }})" class="btn btn-primary btn-sm"><i class="fas fa-print"></i></button>
+
                 </td>
             </tr>
 

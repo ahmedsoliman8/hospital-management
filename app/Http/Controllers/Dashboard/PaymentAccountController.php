@@ -35,7 +35,7 @@ class PaymentAccountController extends Controller
 
     public function show($id)
     {
-        //
+        return  $this->payment->show($id);
     }
 
 
@@ -55,5 +55,8 @@ class PaymentAccountController extends Controller
     {
         return  $this->payment->destroy($request);
     }
+
+
+
 }
 
