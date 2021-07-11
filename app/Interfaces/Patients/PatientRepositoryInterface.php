@@ -25,4 +25,7 @@ interface PatientRepositoryInterface
     // destroy Patients
     public function destroy($request);
 
+    // destroy Patients
+    public function show($id);
+
 }

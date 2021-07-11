@@ -36,6 +36,11 @@ class PatientController extends Controller
         return  $this->patient->edit($id);
     }
 
+    public function show($id)
+    {
+        return  $this->patient->show($id);
+    }
+
 
     public function update(Request $request)
     {

@@ -55,6 +55,7 @@
                                                 <td>
                                                     <a href="{{route('patients.edit',$patient->id)}}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
                                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete{{$patient->id}}"><i class="fas fa-trash"></i></button>
+													<a href="{{route('patients.show',$patient->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                                                 </td>
 											</tr>
                                            @include('Dashboard.patients.delete')
