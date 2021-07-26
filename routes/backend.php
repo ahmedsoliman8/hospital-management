@@ -35,6 +35,14 @@ Route::group(
     //#############################################################################
 
 
+    //##################### Dashboard Admin ####################################
+    Route::get('/dashboard/doctor', function () {
+        return view('Dashboard.Doctor.index');
+    })->middleware(['auth:doctor'])->name('dashboard.doctor');
+
+    //#############################################################################
+
+
 
 
 
@@ -106,6 +114,17 @@ Route::group(
       Route::resource('payments', PaymentAccountController::class);
 
         //############################# end Payment route ######################################
+
+
+
+        //############################# group_invoices route ##########################################
+
+        Route::view('group_invoices','livewire.group_invoices.index')->name('group_invoices');
+
+        Route::view('group_print_single_invoices','livewire.group_invoices.print')->name('group_print_single_invoices');
+
+        //############################# end single_invoices route ######################################
+
 
 
 

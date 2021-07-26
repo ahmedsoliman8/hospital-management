@@ -45,6 +45,7 @@
 														<option value="" selected disabled>اختار من القائمة</option>
 														<option value="user">الدخول كمريض</option>
 														<option value="admin">الدخول ك ادمن</option>
+														<option value="doctor">الدخول ك كدكتور</option>
 													</select>
 												</div>
 												{{--form user--}}
@@ -128,6 +129,51 @@
 														<p>Don't have an account? <a href="{{ url('/register') }}">Create an Account</a></p>
 													</div>
 												</div>
+
+												{{--form admin--}}
+												<div class="panel" id="doctor">
+													<h5 class="font-weight-semibold mb-4">الدخول كدكتور</h5>
+													<form method="POST" action="{{ route('login.doctor') }}">
+														@csrf
+														<div class="form-group">
+															<label>Email</label> <input class="form-control" placeholder="Enter your email" type="text" name="email" :value="old('email')" required autofocus>
+														</div>
+														<div class="form-group">
+															<label>Password</label> <input class="form-control" placeholder="Enter your password" type="password"    type="password"
+																						   name="password"
+																						   required autocomplete="current-password" >
+															<!-- Remember Me -->
+															<div class="form-group">
+																<label for="remember_me" class="inline-flex items-center">
+																	<input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
+																	<span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+																</label>
+															</div>
+														</div><button type="submit" class="btn btn-main-primary btn-block">   {{ __('Log in') }}</button>
+														<div class="row row-xs">
+															<div class="col-sm-6">
+																<button class="btn btn-block"><i class="fab fa-facebook-f"></i> Signup with Facebook</button>
+															</div>
+															<div class="col-sm-6 mg-t-10 mg-sm-t-0">
+																<button class="btn btn-info btn-block"><i class="fab fa-twitter"></i> Signup with Twitter</button>
+															</div>
+														</div>
+													</form>
+													<div class="main-signin-footer mt-5">
+														<p>
+															@if (Route::has('password.request'))
+																<a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+																	{{ __('Forgot your password?') }}
+																</a>
+															@endif
+														</p>
+														<p>Don't have an account? <a href="{{ url('/register') }}">Create an Account</a></p>
+													</div>
+												</div>
+
+
+
+
 											</div>
 										</div>
 									</div>

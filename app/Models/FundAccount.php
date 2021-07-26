@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class FundAccount extends Model
 {
     use HasFactory;
-    public $fillable= ['date','single_invoice_id','debit','credit','payment_id'];
+    public $fillable= ['date','group_invoice_id','single_invoice_id','debit','credit','payment_id'];
 }

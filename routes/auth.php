@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\Auth\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -30,6 +31,15 @@ Route::post('User/login', [AuthenticatedSessionController::class, 'store'])
 
 Route::post('Admin/login', [AdminController::class, 'store'])
     ->middleware('guest') ->name('login.admin');
+
+//#################################################################################//
+
+
+
+//######################################### Route Admin Login #########################//
+
+Route::post('Doctor/login', [DoctorController::class, 'store'])
+    ->middleware('guest') ->name('login.doctor');
 
 //#################################################################################//
 
