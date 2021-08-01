@@ -34,13 +34,9 @@ Route::post('Admin/login', [AdminController::class, 'store'])
 
 //#################################################################################//
 
-
-
-//######################################### Route Admin Login #########################//
-
+//######################################### Route Doctor Login #########################//
 Route::post('Doctor/login', [DoctorController::class, 'store'])
     ->middleware('guest') ->name('login.doctor');
-
 //#################################################################################//
 
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
@@ -90,3 +86,15 @@ Route::post('Admin/logout', [AdminController::class, 'destroy'])
     ->middleware('auth:admin')
     ->name('logout.admin');
 //#######################################################################################///
+
+
+//######################################### Route Admin Logout #########################//
+Route::post('Doctor/logout', [DoctorController::class, 'destroy'])
+    ->middleware('auth:doctor')
+    ->name('logout.doctor');
+//#######################################################################################///
+
+
+
+
+

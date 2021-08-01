@@ -104,7 +104,7 @@
                                                     @foreach($invoices as $invoice)
                                                         <tr>
                                                             <td>{{$loop->iteration}}</td>
-                                                            <td>{{$invoice->service->name}}</td>
+                                                            <td>{{isset($invoice->service)?$invoice->service->name:$invoice->group->name}}</td>
                                                             <td>{{$invoice->invoice_date}}</td>
                                                             <td>{{$invoice->total_with_tax}}</td>
                                                             <td>{{$invoice->type == 1 ? 'نقدي' : 'اجل'}}</td>
