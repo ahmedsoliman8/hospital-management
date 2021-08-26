@@ -183,8 +183,9 @@
                                                             <td>{{$loop->iteration}}</td>
                                                             <td>{{$patient_account->date}}</td>
                                                             <td>
-                                                                @if($patient_account->SingleInvoice )
-                                                                    {{$patient_account->SingleInvoice->service->name}}
+                                                                @if($patient_account->invoice )
+                                                                    {{$patient_account->invoice->service?$patient_account->invoice->service->name:null}}
+                                                                    {{$patient_account->invoice->group?$patient_account->invoice->group->name:null}}
                                                                 @elseif($patient_account->ReceiptAccount )
                                                                     {{$patient_account->ReceiptAccount->description}}
                                                                 @elseif($patient_account->PaymentAccount )

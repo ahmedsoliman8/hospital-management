@@ -18,6 +18,8 @@ class Doctor extends Authenticatable implements TranslatableContract
   //s  protected  $guarded=[];
     use HasFactory,Notifiable;
 
+    protected $remember_token = false;
+
 
 
     /**

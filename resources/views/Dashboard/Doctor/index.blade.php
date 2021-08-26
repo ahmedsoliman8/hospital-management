@@ -1,4 +1,4 @@
-@extends('Dashboard.layouts.master')
+@extends('Dashboard.layouts.master-doctor')
 @section('css')
 <!--  Owl-carousel css-->
 <link href="{{URL::asset('Dashboard/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />

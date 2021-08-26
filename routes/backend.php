@@ -6,11 +6,8 @@ use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\SingleServiceController;
 use App\Http\Controllers\Dashboard\InsuranceController;
 use App\Http\Controllers\Dashboard\AmbulanceController;
-use App\Http\Livewire\CreateGroupServices;
 use App\Http\Controllers\Dashboard\PatientController;
-
 use App\Http\Controllers\Dashboard\ReceiptAccountController;
-
 use App\Http\Controllers\Dashboard\PaymentAccountController;
 
 Route::get('/Dashboard_Admin',[DashboardController::class,'index']);
@@ -35,12 +32,7 @@ Route::group(
     //#############################################################################
 
 
-    //##################### Dashboard Admin ####################################
-    Route::get('/dashboard/doctor', function () {
-        return view('Dashboard.Doctor.index');
-    })->middleware(['auth:doctor'])->name('dashboard.doctor');
 
-    //#############################################################################
 
 
 
