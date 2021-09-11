@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="timeline-footer d-flex align-items-center flex-wrap">
                                         <i class="fas fa-user-md"></i>&nbsp;
-                                        <span>{{$patient_record->Doctor->name}}</span>
+                                        <span>{{$patient_record->doctor->name}}</span>
                                         <span class="mr-auto"><i class="fe fe-calendar text-muted mr-1"></i>{{$patient_record->date}}</span>
                                     </div>
                                 </div>

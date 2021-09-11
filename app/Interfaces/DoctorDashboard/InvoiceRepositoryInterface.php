@@ -13,4 +13,8 @@ Interface InvoiceRepositoryInterface
 {
     // Get All Inovices
     public function index();
+
+    public  function completedInvoices();
+
+    public function reviewInvoices();
 }

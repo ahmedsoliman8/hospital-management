@@ -1,14 +1,14 @@
 <!-- Modal -->
-<div class="modal fade" id="add-diagnosis-{{$invoice->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="add-review-{{$invoice->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">تشخيص حالة مريض</h5>
+                <h5 class="modal-title" id="exampleModalLabel">مراجعة حالة مريض</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route('doctor.diagnosis.store')}}" method="POST">
+            <form action="{{route('doctor.add_review')}}" method="POST">
             @csrf
             <div class="modal-body">
 
@@ -24,6 +24,11 @@
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">الادوية</label>
                     <textarea class="form-control" name="medicine" rows="6"></textarea>
+                </div>
+
+                <div class="form-group" style="position:relative;">
+                    <label>تاريخ المراجعة</label>
+                    <input class="form-control fc-datepicker" id="review_date" name="review_date" type="text" required>
                 </div>
 
             </div>

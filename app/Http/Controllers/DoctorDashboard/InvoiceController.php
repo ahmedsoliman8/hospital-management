@@ -17,9 +17,19 @@ class InvoiceController extends Controller
     }
 
 
+
+
     public function index()
     {
         return  $this->invoice->index();
+    }
+
+    public  function completedInvoices(){
+        return  $this->invoice->completedInvoices();
+    }
+
+    public function reviewInvoices(){
+        return  $this->invoice->reviewInvoices();
     }
 
 
